@@ -6,16 +6,16 @@
 #    By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/10 15:49:58 by vvasiuko          #+#    #+#              #
-#    Updated: 2025/01/19 15:07:47 by vvasiuko         ###   ########.fr        #
+#    Updated: 2025/01/07 16:17:31 by vvasiuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo
+NAME = philo_bonus
 CC = cc
-CFLAGS = -pthread -Wall -Wextra -Werror -Iincludes -g
+CFLAGS = -pthread -Wall -Wextra -Werror -Iincludes -g -fsanitize=thread
 # -fsanitize=thread
 # -fsanitize=address
-SRC = main.c utils.c parse.c threads.c pulse_check.c life.c
+SRC = main.c utils.c parse.c processes.c pulse_check.c life.c
 OBJ = $(SRC:.c=.o)
 RM = rm -f
 

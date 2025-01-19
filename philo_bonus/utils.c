@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/19 13:03:10 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/01/19 15:39:39 by vvasiuko         ###   ########.fr       */
+/*   Created: 2025/01/19 13:02:17 by vvasiuko          #+#    #+#             */
+/*   Updated: 2025/01/19 14:47:07 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 /*
 1 second = 1.000 milliseconds
@@ -45,41 +45,42 @@ void	free_args(t_args *args)
 {
 	unsigned int	i;
 
-	if (args->forks)
-		free(args->forks);
-	i = 0;
-	if (args->mtx_forks)
-	{
-		while (i < args->num_ph)
-			pthread_mutex_destroy(&args->mtx_forks[i++]);
-		free(args->mtx_forks);
-	}
+	// if (args->forks)
+	// 	free(args->forks);
+	// i = 0;
+	// if (args->mtx_forks)
+	// {
+	// 	while (i < args->num_ph)
+	// 	{
+	// 		pthread_mutex_destroy(&args->mtx_forks[i]);
+	// 		i++;
+	// 	}
+	// 	free(args->mtx_forks);
+	// }
 	i = 0;
 	if (args->phs)
 	{
 		while (i < args->num_ph)
 		{
-			pthread_mutex_destroy(&args->phs[i].ate_m);
-			pthread_mutex_destroy(&args->phs[i].last_meal_m);
+			// pthread_mutex_destroy(&args->phs[i].ate_m);
+			// pthread_mutex_destroy(&args->phs[i].last_meal_m);
 			i++;
 		}
 		free(args->phs);
 	}
-	pthread_mutex_destroy(&args->print_m);
-	pthread_mutex_destroy(&args->rip_m);
 }
 
 void	print_state(t_ph *ph, char *msg)
 {
 	uint64_t	elapsed;
 
-	pthread_mutex_lock(&ph->args->rip_m);
+	// pthread_mutex_lock(&ph->args->print_m);
+	// pthread_mutex_lock(&ph->args->rip_m);
 	if (!ph->args->rip)
 	{
-		pthread_mutex_lock(&ph->args->print_m);
 		elapsed = current_time() - ph->args->sim_start;
-		printf("%lu %i %s\n", elapsed, ph->id, msg);
-		pthread_mutex_unlock(&ph->args->print_m);
+		printf("%llu %i %s\n", elapsed, ph->id, msg);
 	}
-	pthread_mutex_unlock(&ph->args->rip_m);
+	// pthread_mutex_unlock(&ph->args->rip_m);
+	// pthread_mutex_unlock(&ph->args->print_m);
 }

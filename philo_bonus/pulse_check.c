@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/19 13:03:18 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/01/19 15:40:39 by vvasiuko         ###   ########.fr       */
+/*   Created: 2025/01/19 13:02:03 by vvasiuko          #+#    #+#             */
+/*   Updated: 2025/01/19 14:46:50 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 /*
 Simulation must stop if every philosopher has eaten must_eat number of times
@@ -26,19 +26,19 @@ bool	full_death(t_args *args)
 	res = true;
 	while (args->must_eat > 0 && i < args->num_ph)
 	{
-		pthread_mutex_lock(&args->phs[i].ate_m);
+		// pthread_mutex_lock(&args->phs[i].ate_m);
 		res = res && (args->phs[i].ate >= args->must_eat);
-		pthread_mutex_unlock(&args->phs[i].ate_m);
+		// pthread_mutex_unlock(&args->phs[i].ate_m);
 		i++;
 	}
 	if (args->must_eat > 0 && res == true)
 	{
-		pthread_mutex_lock(&args->rip_m);
+		// pthread_mutex_lock(&ph->args->print_m);
+		// pthread_mutex_lock(&args->rip_m);
 		args->rip = true;
-		pthread_mutex_lock(&args->print_m);
+		// pthread_mutex_unlock(&args->rip_m);
 		printf("ALL ATE ENOUGH\n");
-		pthread_mutex_unlock(&args->print_m);
-		pthread_mutex_unlock(&args->rip_m);
+		// pthread_mutex_unlock(&ph->args->print_m);
 		return (true);
 	}
 	return (false);
@@ -57,20 +57,18 @@ bool	starvation_death(t_args *args)
 	i = 0;
 	while (i < args->num_ph)
 	{
-		pthread_mutex_lock(&args->phs[i].last_meal_m);
+		// pthread_mutex_lock(&args->phs[i].last_meal_m);
 		if (current_time() - args->phs[i].last_meal > args->tt_die)
 		{
-			pthread_mutex_lock(&args->rip_m);
+			// pthread_mutex_lock(&args->rip_m);
 			args->rip = true;
-			pthread_mutex_lock(&args->print_m);
+			// pthread_mutex_unlock(&args->rip_m);
 			elapsed = current_time() - args->sim_start;
-			printf("%lu %i %s\n", elapsed, args->phs[i].id, "died");
-			pthread_mutex_unlock(&args->print_m);
-			pthread_mutex_unlock(&args->rip_m);
-			pthread_mutex_unlock(&args->phs[i].last_meal_m);
+			printf("%llu %i %s\n", elapsed, args->phs[i].id, "died");
+			// pthread_mutex_unlock(&args->phs[i].last_meal_m);
 			return (true);
 		}
-		pthread_mutex_unlock(&args->phs[i].last_meal_m);
+		// pthread_mutex_unlock(&args->phs[i].last_meal_m);
 		i++;
 	}
 	return (false);
@@ -83,13 +81,13 @@ in order to get out of the while (1) loop.
 
 bool	someone_rip(t_args *args)
 {
-	pthread_mutex_lock(&args->rip_m);
+	// pthread_mutex_lock(&args->rip_m);
 	if (args->rip)
 	{
-		pthread_mutex_unlock(&args->rip_m);
+		// pthread_mutex_unlock(&args->rip_m);
 		return (true);
 	}
-	pthread_mutex_unlock(&args->rip_m);
+	// pthread_mutex_unlock(&args->rip_m);
 	return (false);
 }
 

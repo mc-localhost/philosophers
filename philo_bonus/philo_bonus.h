@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:00:03 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/01/19 15:05:55 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/01/19 15:06:15 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
 # include <limits.h>   // for INT_MAX
 # include <stdint.h> // for uint64_t
@@ -22,19 +22,21 @@
 # include <string.h>   // for memset
 # include <sys/time.h> // for gettimeofday, uint64_t
 # include <unistd.h>   // for write, usleep
+# include <semaphore.h>   // for semaphores
 
 typedef struct s_ph
 {
 	unsigned int	id; // just array index + 1
-	pthread_t		th; // philosopher thread
-	bool			*l_fork; // link to the left fork, true when taken
-	bool			*r_fork; // same for the right one
-	pthread_mutex_t	*l_fork_m; // link to the left fork mutex
-	pthread_mutex_t	*r_fork_m; // same for the right one
+	// pthread_t		th; // philosopher thread
+	pid_t			process_id;
+	// bool			*l_fork; // link to the left fork, true when taken
+	// bool			*r_fork; // same for the right one
+	// pthread_mutex_t	*l_fork_m; // link to the left fork mutex
+	// pthread_mutex_t	*r_fork_m; // same for the right one
 	unsigned int	ate; // number of times philosopher ate
-	pthread_mutex_t	ate_m; // corresponding mutex
+	// pthread_mutex_t	ate_m; // corresponding mutex
 	uint64_t		last_meal; // last meal start in ms after simulation start
-	pthread_mutex_t	last_meal_m; // corresponding mutex
+	// pthread_mutex_t	last_meal_m; // corresponding mutex
 	struct s_args	*args; // link to global arguments
 }					t_ph;
 
@@ -46,13 +48,13 @@ typedef struct s_args
 	uint64_t		tt_sleep; // time to sleep in ms
 	unsigned int	must_eat; // times all must eat for simulation to stop
 	struct s_ph		*phs; // philosophers' array
-	pthread_t		waiter_th; // waiter thread (simulation monitor)
+	// pthread_t		waiter_th; // waiter thread (simulation monitor)
 	uint64_t		sim_start; // simulation start
-	bool			*forks; // forks' array
-	pthread_mutex_t	*mtx_forks; // forks' mutexes array
+	// bool			*forks; // forks' array
+	// pthread_mutex_t	*mtx_forks; // forks' mutexes array
 	bool			rip; // simulation must stop
-	pthread_mutex_t	rip_m; // corresponding mutex
-	pthread_mutex_t	print_m; //mutex for printf
+	// pthread_mutex_t	rip_m; // corresponding mutex
+	sem_t			*forks;
 }					t_args;
 
 /*		PARSE		*/
