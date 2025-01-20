@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:15:24 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/01/07 15:39:14 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/01/20 13:56:37 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	parse(int argc, char **argv, t_args *args)
 		args->num_ph = (unsigned)pos_atoi(argv[1]);
 	else
 		return (printf("There must be between 1 and 200 philosophers. "), 1);
-	args->tt_die = (uint64_t)pos_atoi(argv[2]);
-	args->tt_eat = (uint64_t)pos_atoi(argv[3]);
-	args->tt_sleep = (uint64_t)pos_atoi(argv[4]);
+	args->tt_die = (unsigned long long)pos_atoi(argv[2]);
+	args->tt_eat = (unsigned long long)pos_atoi(argv[3]);
+	args->tt_sleep = (unsigned long long)pos_atoi(argv[4]);
 	if (argc == 6)
 		args->must_eat = (unsigned)pos_atoi(argv[5]);
 	return (0);

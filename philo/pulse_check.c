@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:03:18 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/01/19 15:40:39 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:31:38 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	full_death(t_args *args)
 		pthread_mutex_lock(&args->rip_m);
 		args->rip = true;
 		pthread_mutex_lock(&args->print_m);
-		printf("ALL ATE ENOUGH\n");
+		write(1, "ALL ATE ENOUGH\n", 15);
 		pthread_mutex_unlock(&args->print_m);
 		pthread_mutex_unlock(&args->rip_m);
 		return (true);
@@ -52,7 +52,6 @@ was more than tt_die milliseconds ago.
 bool	starvation_death(t_args *args)
 {
 	unsigned int	i;
-	uint64_t		elapsed;
 
 	i = 0;
 	while (i < args->num_ph)
@@ -63,8 +62,8 @@ bool	starvation_death(t_args *args)
 			pthread_mutex_lock(&args->rip_m);
 			args->rip = true;
 			pthread_mutex_lock(&args->print_m);
-			elapsed = current_time() - args->sim_start;
-			printf("%lu %i %s\n", elapsed, args->phs[i].id, "died");
+			printf("%llu %u %s\n", current_time() - args->sim_start,
+				args->phs[i].id, "died");
 			pthread_mutex_unlock(&args->print_m);
 			pthread_mutex_unlock(&args->rip_m);
 			pthread_mutex_unlock(&args->phs[i].last_meal_m);
@@ -77,7 +76,7 @@ bool	starvation_death(t_args *args)
 }
 
 /*
-Used by philosophers' routine 
+Used by philosophers' routine
 in order to get out of the while (1) loop.
 */
 
@@ -99,7 +98,7 @@ Waiter is "checking pulse" of every philosopher every 100 microseconds.
 
 void	*waiter(void *arg)
 {
-	t_args			*args;
+	t_args	*args;
 
 	args = (t_args *)arg;
 	while (1)
@@ -108,7 +107,6 @@ void	*waiter(void *arg)
 			return (0);
 		if (starvation_death(args))
 			return (0);
-		usleep(100);
 	}
 	return (0);
 }

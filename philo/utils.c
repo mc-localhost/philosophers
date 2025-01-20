@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:03:10 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/01/19 15:39:39 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:32:37 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,22 @@
 1 millisecond = 1.000 microseconds
 */
 
-uint64_t	current_time(void)
+unsigned long long	current_time(void)
 {
 	struct timeval	cur_t;
-	uint64_t		cur_t_ms;
 
 	gettimeofday(&cur_t, NULL);
-	cur_t_ms = 1000 * cur_t.tv_sec + cur_t.tv_usec / 1000;
-	return (cur_t_ms);
+	return (1000 * cur_t.tv_sec + cur_t.tv_usec / 1000);
 }
 
 /*
 Precision dictated function
-to avoid oversleeping with regular usleep().
+to avoid oversleeping with regular	usleep(void).
 */
 
-void	custom_sleep(uint64_t ms)
+void	custom_sleep(unsigned long long ms)
 {
-	uint64_t	start;
+	unsigned long long	start;
 
 	start = current_time();
 	while (current_time() - start < ms)
@@ -71,14 +69,12 @@ void	free_args(t_args *args)
 
 void	print_state(t_ph *ph, char *msg)
 {
-	uint64_t	elapsed;
-
 	pthread_mutex_lock(&ph->args->rip_m);
 	if (!ph->args->rip)
 	{
 		pthread_mutex_lock(&ph->args->print_m);
-		elapsed = current_time() - ph->args->sim_start;
-		printf("%lu %i %s\n", elapsed, ph->id, msg);
+		printf("%llu %u %s\n", current_time() - ph->args->sim_start, ph->id,
+			msg);
 		pthread_mutex_unlock(&ph->args->print_m);
 	}
 	pthread_mutex_unlock(&ph->args->rip_m);

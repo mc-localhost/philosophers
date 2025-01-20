@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:09:49 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/01/19 14:47:59 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:17:41 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	init(int argc, char **argv, t_args *args, unsigned int i)
 	args->forks = malloc(sizeof(bool) * args->num_ph);
 	if (!args->forks)
 		return (free_args(args), printf("malloc fail\n"), 1);
+	memset(args->forks, 0, sizeof(bool) * args->num_ph);
 	args->mtx_forks = malloc(sizeof(pthread_mutex_t) * args->num_ph);
 	if (!args->mtx_forks)
 		return (free_args(args), printf("malloc fail\n"), 1);
