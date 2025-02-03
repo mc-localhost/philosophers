@@ -6,15 +6,14 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:48:49 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/02/03 16:34:52 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:55:19 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /*
-There is a thread for every philosopher
-and one additional thread to monitor them.
+There is a thread for every philosopher.
 */
 
 int	create_threads(t_args *args)

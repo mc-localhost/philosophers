@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:03:33 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/02/03 15:24:57 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:58:37 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*life(void *arg)
 	while (1)
 	{
 		if (ph->args->num_ph == 1)
-			custom_sleep(10 + ph->args->tt_die);
+			custom_sleep(1 + ph->args->tt_die);
 		if (someone_rip(ph->args))
 			break ;
 		lock_forks(ph->l_fork_m, ph->r_fork_m);

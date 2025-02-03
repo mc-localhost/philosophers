@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:00:03 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/01/20 13:59:20 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:57:28 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ void					*life(void *arg);
 bool					full_death(t_args *args);
 bool					starvation_death(t_args *args);
 bool					someone_rip(t_args *args);
-void					*waiter(void *arg);
+int						waiter(void *arg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:03:18 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/02/03 16:34:44 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:57:14 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ bool	someone_rip(t_args *args)
 }
 
 /*
-Waiter is "checking pulse" of every philosopher every 100 microseconds.
+Waiter is constantly "checking pulse" of every philosopher.
 */
 
-void	*waiter(void *arg)
+int	waiter(void *arg)
 {
 	t_args	*args;
 

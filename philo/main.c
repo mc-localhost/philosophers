@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:09:49 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/02/03 15:09:27 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:04:32 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,18 @@ void	init_phs(t_args *args, unsigned int i, unsigned int phs)
 		i++;
 	}
 }
+
+/*
+The program takes parameters separated by spaces in the following order
+	number of philosophers
+	time to die
+	time to eat
+	time to sleep
+	[number of times they should it for simulation to stop]
+
+The last parameter is optional and helps to stop the simulation
+when it might run forever because no one should die.
+*/
 
 int	main(int argc, char **argv)
 {

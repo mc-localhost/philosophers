@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:03:10 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/02/03 15:54:04 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:55:04 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ void	custom_sleep(unsigned long long ms)
 		usleep(100);
 }
 
+/*
+Mutex can be destroyed only if it was unlocked (supposedly),
+so we should unlock locked forks, when someone is still eating
+at the moment when simulation should end.
+*/
+
 static void	unlock_locked(t_args *args)
 {
 	unsigned int	i;
@@ -51,7 +57,6 @@ static void	unlock_locked(t_args *args)
 		i++;
 	}
 	free(args->forks);
-	pthread_mutex_unlock(&args->print_m);
 }
 
 void	free_args(t_args *args)
@@ -78,6 +83,7 @@ void	free_args(t_args *args)
 		}
 		free(args->phs);
 	}
+	pthread_mutex_unlock(&args->print_m);
 	pthread_mutex_destroy(&args->print_m);
 	pthread_mutex_destroy(&args->rip_m);
 }
