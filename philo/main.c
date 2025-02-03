@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:09:49 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/01/20 16:17:41 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:09:27 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	main(int argc, char **argv)
 		else
 		{
 			create_threads(&args);
+			waiter(&args);
 			join_threads(&args);
 			free_args(&args);
 		}

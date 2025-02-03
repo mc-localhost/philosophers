@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:03:10 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/01/20 16:32:37 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:54:04 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,27 @@ void	custom_sleep(unsigned long long ms)
 		usleep(100);
 }
 
+static void	unlock_locked(t_args *args)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < args->num_ph)
+	{
+		if (args->forks[i] == true)
+			pthread_mutex_unlock(&args->mtx_forks[i]);
+		i++;
+	}
+	free(args->forks);
+	pthread_mutex_unlock(&args->print_m);
+}
+
 void	free_args(t_args *args)
 {
 	unsigned int	i;
 
 	if (args->forks)
-		free(args->forks);
+		unlock_locked(args);
 	i = 0;
 	if (args->mtx_forks)
 	{

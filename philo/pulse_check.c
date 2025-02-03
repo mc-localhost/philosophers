@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:03:18 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/01/20 16:31:38 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:34:44 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ bool	full_death(t_args *args)
 		pthread_mutex_lock(&args->rip_m);
 		args->rip = true;
 		pthread_mutex_lock(&args->print_m);
-		write(1, "ALL ATE ENOUGH\n", 15);
-		pthread_mutex_unlock(&args->print_m);
+		printf("ALL ATE ENOUGH\n");
 		pthread_mutex_unlock(&args->rip_m);
 		return (true);
 	}
@@ -64,7 +63,6 @@ bool	starvation_death(t_args *args)
 			pthread_mutex_lock(&args->print_m);
 			printf("%llu %u %s\n", current_time() - args->sim_start,
 				args->phs[i].id, "died");
-			pthread_mutex_unlock(&args->print_m);
 			pthread_mutex_unlock(&args->rip_m);
 			pthread_mutex_unlock(&args->phs[i].last_meal_m);
 			return (true);

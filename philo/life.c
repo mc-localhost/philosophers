@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:03:33 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/01/19 15:14:35 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:24:57 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	*life(void *arg)
 	t_ph	*ph;
 
 	ph = (t_ph *)arg;
+	print_state(ph, "is thinking");
 	if (ph->id & 1)
 		custom_sleep(1);
 	while (1)

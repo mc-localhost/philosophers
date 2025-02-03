@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:48:49 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/01/07 16:19:29 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:34:52 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	create_threads(t_args *args)
 			return (printf("Couldn't create thread\n"), free_args(args), 1);
 		i++;
 	}
-	if (pthread_create(&args->waiter_th, NULL, &waiter, args) != 0)
-		return (printf("Couldn't create waiter thread\n"), free_args(args), 1);
 	return (0);
 }
 
@@ -44,7 +42,5 @@ int	join_threads(t_args *args)
 			return (printf("Couldn't join thread\n"), free_args(args), 1);
 		i++;
 	}
-	if (pthread_join(args->waiter_th, NULL) != 0)
-		return (printf("Couldn't join waiter thread\n"), free_args(args), 1);
 	return (0);
 }
