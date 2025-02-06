@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:00:03 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/02/03 16:57:28 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:45:30 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int						pos_atoi(char *str);
 int						parse(int argc, char **argv, t_args *args);
 /*		UTILS		*/
 unsigned long long		current_time(void);
-void					custom_sleep(unsigned long long ms);
+bool					custom_sleep(unsigned long long ms, t_args *args);
 void					free_args(t_args *args);
 void					print_state(t_ph *ph, char *msg);
 /*		MAIN		*/

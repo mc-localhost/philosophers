@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:03:18 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/02/03 16:57:14 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:36:02 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int	waiter(void *arg)
 			return (0);
 		if (starvation_death(args))
 			return (0);
+		// usleep(100);
 	}
 	return (0);
 }

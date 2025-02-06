@@ -6,7 +6,7 @@
 /*   By: vvasiuko <vvasiuko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:03:10 by vvasiuko          #+#    #+#             */
-/*   Updated: 2025/02/03 16:55:04 by vvasiuko         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:40:33 by vvasiuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,21 @@ unsigned long long	current_time(void)
 
 /*
 Precision dictated function
-to avoid oversleeping with regular	usleep(void).
+to avoid oversleeping with regular usleep(void).
 */
 
-void	custom_sleep(unsigned long long ms)
+bool	custom_sleep(unsigned long long ms, t_args *args)
 {
 	unsigned long long	start;
 
 	start = current_time();
 	while (current_time() - start < ms)
+	{
+		if (someone_rip(args))
+			return (false);
 		usleep(100);
+	}
+	return (true);
 }
 
 /*
